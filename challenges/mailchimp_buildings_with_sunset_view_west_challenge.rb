@@ -13,16 +13,17 @@ Can you do this using just one forward pass through the array?
 def buildings_with_sunset_view(buildings:)
   i = buildings.count - 1
   biggest_height = buildings.last
-  solution_buildings = [biggest_height]
 
-  while i >= 0
-    building_height = buildings[i]
-    solution_buildings << building_height if building_height > biggest_height
-    biggest_height = building_height if building_height > biggest_height
-    i -= 1
+  [biggest_height].tap do |solution_buildings|
+    while i >= 0
+      building_height = buildings[i]
+      solution_buildings << building_height if building_height > biggest_height
+      biggest_height = building_height if building_height > biggest_height
+      i -= 1
+    end
   end
 
-  solution_buildings
+
 end
 
 samples = [
