@@ -17,8 +17,10 @@ def buildings_with_sunset_view(buildings:)
   [biggest_height].tap do |solution_buildings|
     while i >= 0
       building_height = buildings[i]
-      solution_buildings << building_height if building_height > biggest_height
-      biggest_height = building_height if building_height > biggest_height
+      if building_height > biggest_height
+        solution_buildings << building_height
+        biggest_height = building_height
+      end
       i -= 1
     end
   end
