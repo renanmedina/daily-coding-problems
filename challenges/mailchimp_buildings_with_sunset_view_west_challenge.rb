@@ -11,11 +11,11 @@ Can you do this using just one forward pass through the array?
 =end
 
 def buildings_with_sunset_view(buildings:)
-  i = buildings.count - 1
+  i = buildings.count - 2
   biggest_height = buildings.last
 
   [biggest_height].tap do |solution_buildings|
-    while i >= 0
+    while i > -1
       building_height = buildings[i]
       if building_height > biggest_height
         solution_buildings << building_height
@@ -24,8 +24,6 @@ def buildings_with_sunset_view(buildings:)
       i -= 1
     end
   end
-
-
 end
 
 samples = [
