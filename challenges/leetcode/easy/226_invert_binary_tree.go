@@ -33,7 +33,38 @@ type TestCase struct {
 }
 
 func main() {
-	cases := [3]TestCase{
+	cases := makeInputCases()
+
+	for i := range cases {
+		fmt.Println(fmt.Sprintf("Inverting binary tree: %d", i))
+		c := cases[i]
+		inverted := invertTree(c.Input)
+		if reflect.DeepEqual(inverted, c.ExpectedOutput) {
+			fmt.Println("✅ Binary tree inverted correctly")
+			continue
+		}
+
+		fmt.Println("❌ - Binary tree inverted correctly")
+	}
+}
+
+func invertTree(root *TreeNode) *TreeNode {
+	if root == nil {
+		return &TreeNode{}
+	}
+
+	left := root.Left
+	right := root.Right
+
+	root.Left = right
+	root.Right = left
+	invertTree(root.Left)
+	invertTree(root.Right)
+	return root
+}
+
+func makeInputCases() [3]TestCase {
+	return [3]TestCase{
 		TestCase{
 			Input: &TreeNode{
 				Val: 4,
@@ -103,33 +134,4 @@ func main() {
 			ExpectedOutput: &TreeNode{},
 		},
 	}
-
-	// fmt.Println(cases[0].Input.values())
-
-	for i := range cases {
-		fmt.Println(fmt.Sprintf("Inverting binary tree: %d", i))
-		c := cases[i]
-		inverted := invertTree(c.Input)
-		if reflect.DeepEqual(inverted, c.ExpectedOutput) {
-			fmt.Println("✅ Binary tree inverted correctly")
-			continue
-		}
-
-		fmt.Println("❌ - Binary tree inverted correctly")
-	}
-}
-
-func invertTree(root *TreeNode) *TreeNode {
-	if root == nil {
-		return &TreeNode{}
-	}
-
-	left := root.Left
-	right := root.Right
-
-	root.Left = right
-	root.Right = left
-	invertTree(root.Left)
-	invertTree(root.Right)
-	return root
 }
