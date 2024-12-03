@@ -69,7 +69,8 @@ func dfs(grid WorldMapGrid, row int, col int, totalRows int, totalColumns int) {
 		return
 	}
 
-	grid[row][col] = 0
+	grid[row][col] = 0 // toggle visited "1" location (island piece)
+
 	dfs(grid, row-1, col, totalRows, totalColumns) // check up positions
 	dfs(grid, row+1, col, totalRows, totalColumns) // check down positions
 	dfs(grid, row, col+1, totalRows, totalColumns) // check right positions
